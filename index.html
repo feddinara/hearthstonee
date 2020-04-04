@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.enemy{
+			margin-top: 100px;
+			text-align:center;
+			height: 250px;
+			transition: 2s;
+		}
+		.player_img{
+			width:200px;
+			height: 300px;
+			margin-left: auto;
+			margin-right: auto;
+			background-size: 100% 100%;
+			position: relative;
+			transition: 2s;
+
+		}
+		.enemy_img{
+			width:200px;
+			height: 300px;
+			margin-left: auto;
+			margin-right: auto;
+			background-size: 100% 100%;
+			position: relative;
+			transition: 2s;
+
+		}
+		.player{
+			text-align: center;
+			height: 250px;
+			margin-top: 150px;
+			transition: 2s;
+
+		}
+		.player_property{
+			position: absolute;
+			top:80%;
+
+
+		}
+		.enemy_name{
+			color: white; font-family: Arial;
+		}
+		.player_name{
+			color: white; font-family: Arial
+		}
+	</style>
+</head>
+<body style="background-image: url(images/bg.jpg); background-size: 100% ">
+
+	<div class="enemy">
+		<h1 class="enemy_name"></h1>
+
+		<div class="enemy_img">
+			<h2 class="enemy_hp player_property" style="left: 82%;">0</h2>
+			<h2 class="enemy_damage player_property" style="left: 10%;">0</h2>
+		</div>	
+
+	</div>
+
+	<div class="player">
+		<h1 class="player_name"></h1>
+		
+		<div class="player_img">
+			<h2 class="player_hp player_property" style="left: 82%;">0</h2>
+			<h2 class="player_damage player_property" style="left: 10%;">0</h2>
+		</div>
+
+	</div>
+
+	<script type="text/javascript">
+		let player = document.querySelector('.player');
+		let enemy = document.querySelector('.enemy');
+		let img_p = document.querySelector('.player_img');
+		let img_e = document.querySelector('.enemy_img');
+		let hp_p = document.querySelector(".player_hp");
+		let hp_e = document.querySelector(".enemy_hp");
+		let dmg_p = document.querySelector(".player_damage");
+		let dmg_e = document.querySelector(".enemy_damage");
+		let name_p = document.querySelector(".player_name");
+		let name_e = document.querySelector(".enemy_name");
+		let getRandom = function(){
+			let num = Math.random() * 10;
+			let roundNum = Math.round(num);
+			return roundNum;
+		}
+		let playerr = {
+			name : "Игрок",
+			hp : getRandom(),
+			url : "url(images/1.png)",
+			dmg : getRandom()
+		}
+
+		let enemyy = {
+			name : "Враг",
+			hp : getRandom(),
+			url : "url(images/2.png)",
+			dmg : getRandom()
+		}
+		img_p.style.backgroundImage = playerr.url;
+		img_e.style.backgroundImage = enemyy.url;
+		hp_p.innerHTML = playerr.hp;
+		hp_e.innerHTML = enemyy.hp;
+		dmg_p.innerHTML = playerr.dmg;
+		dmg_e.innerHTML = enemyy.dmg;
+		name_p.innerHTML = playerr.name;
+		name_e.innerHTML = enemyy.name;
+		let attack = function(){
+			playerr.hp = playerr.hp - enemyy.dmg;
+			hp_e.innerHTML = enemyy.hp;
+			enemyy.hp = enemyy.hp - playerr.dmg;
+			hp_p.innerHTML = playerr.hp;
+			alert('Атака началась');
+			if (playerr.hp < enemyy.hp) {
+				player.style.opacity = 0;
+				playerr.name = 'Игрок проиграл';
+				name_p.innerHTML = playerr.name;
+			}
+			if (enemyy.hp < playerr.hp) {
+				enemy.style.opacity = 0;
+				enemyy.name = 'Враг проиграл';
+				name_e.innerHTML = enemyy.name;
+			}
+		}
+		setTimeout(attack,5000)
+	</script>
+</body>
+</html>
